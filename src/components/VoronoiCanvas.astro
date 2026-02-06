@@ -1,0 +1,348 @@
+---
+// VoronoiCanvas.astro - Interactive Voronoi Diagram Component
+---
+
+<div class="voronoi-container">
+	<h1>🎨 Voronoi Diagram Generator</h1>
+	<p class="subtitle">Click on the canvas to place points, then generate your Voronoi diagram</p>
+
+	<div class="canvas-container">
+		<canvas id="canvas" width="1000" height="600"></canvas>
+	</div>
+
+	<div class="controls">
+		<button class="btn-generate" id="generateBtn">✨ Generate Voronoi</button>
+		<button class="btn-random" id="randomBtn">🎲 Random Points</button>
+		<button class="btn-clear" id="clearBtn">🗑️ Clear All</button>
+	</div>
+
+	<div class="info">
+		<div class="animation-toggle">
+			<label class="switch-label">
+				<input type="checkbox" id="animationToggle" />
+				<span class="slider"></span>
+			</label>
+			<span class="toggle-text">🎬 Animated Expansion</span>
+		</div>
+
+		<div class="speed-control">
+			<label for="speedSlider" class="speed-label">⚡ Animation Speed:</label>
+			<div class="speed-slider-container">
+				<span class="speed-value-label">Slow</span>
+				<input
+					type="range"
+					id="speedSlider"
+					min="5"
+					max="50"
+					value="15"
+					step="5"
+					class="speed-slider"
+				/>
+				<span class="speed-value-label">Fast</span>
+			</div>
+			<span class="speed-value" id="speedValue">15 px/frame</span>
+		</div>
+
+		<div class="point-count" id="pointCount">Points: 0</div>
+	</div>
+</div>
+
+<style>
+	.voronoi-container {
+		background: white;
+		border-radius: 20px;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+		padding: 30px;
+		max-width: 1200px;
+		width: 100%;
+	}
+
+	h1 {
+		text-align: center;
+		color: #333;
+		margin-bottom: 10px;
+		font-size: 2.5rem;
+	}
+
+	.subtitle {
+		text-align: center;
+		color: #666;
+		margin-bottom: 20px;
+		font-size: 1rem;
+	}
+
+	.canvas-container {
+		position: relative;
+		background: #f8f9fa;
+		border-radius: 10px;
+		overflow: hidden;
+		margin-bottom: 20px;
+		box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+	}
+
+	canvas {
+		display: block;
+		width: 100%;
+		cursor: crosshair;
+	}
+
+	.controls {
+		display: flex;
+		gap: 15px;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+	}
+
+	button {
+		padding: 12px 30px;
+		font-size: 1rem;
+		border: none;
+		border-radius: 8px;
+		cursor: pointer;
+		font-weight: 600;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+	}
+
+	.btn-generate {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+	}
+
+	.btn-generate:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+	}
+
+	.btn-clear {
+		background: #e74c3c;
+		color: white;
+	}
+
+	.btn-clear:hover {
+		background: #c0392b;
+		transform: translateY(-2px);
+	}
+
+	.btn-random {
+		background: #3498db;
+		color: white;
+	}
+
+	.btn-random:hover {
+		background: #2980b9;
+		transform: translateY(-2px);
+	}
+
+	.info {
+		text-align: center;
+		color: #666;
+		margin-top: 15px;
+		font-size: 0.9rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.animation-toggle {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding: 10px 20px;
+		background: #f8f9fa;
+		border-radius: 25px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	.toggle-text {
+		font-weight: 600;
+		color: #333;
+		user-select: none;
+	}
+
+	.switch-label {
+		position: relative;
+		display: inline-block;
+		width: 50px;
+		height: 26px;
+		cursor: pointer;
+	}
+
+	.switch-label input {
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
+
+	.slider {
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #ccc;
+		transition: 0.3s;
+		border-radius: 26px;
+	}
+
+	.slider:before {
+		position: absolute;
+		content: "";
+		height: 20px;
+		width: 20px;
+		left: 3px;
+		bottom: 3px;
+		background-color: white;
+		transition: 0.3s;
+		border-radius: 50%;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	}
+
+	.switch-label input:checked + .slider {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	}
+
+	.switch-label input:checked + .slider:before {
+		transform: translateX(24px);
+	}
+
+	.speed-control {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 8px;
+		padding: 15px 25px;
+		background: #f8f9fa;
+		border-radius: 25px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		min-width: 300px;
+	}
+
+	.speed-label {
+		font-weight: 600;
+		color: #333;
+		font-size: 0.95rem;
+	}
+
+	.speed-slider-container {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		width: 100%;
+	}
+
+	.speed-value-label {
+		font-size: 0.8rem;
+		color: #666;
+		font-weight: 500;
+	}
+
+	.speed-slider {
+		flex: 1;
+		-webkit-appearance: none;
+		appearance: none;
+		height: 6px;
+		border-radius: 3px;
+		background: linear-gradient(to right, #3498db 0%, #667eea 50%, #e74c3c 100%);
+		outline: none;
+		cursor: pointer;
+	}
+
+	.speed-slider::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background: white;
+		border: 3px solid #667eea;
+		cursor: pointer;
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+		transition: all 0.2s ease;
+	}
+
+	.speed-slider::-webkit-slider-thumb:hover {
+		transform: scale(1.2);
+		border-color: #764ba2;
+	}
+
+	.speed-slider::-moz-range-thumb {
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background: white;
+		border: 3px solid #667eea;
+		cursor: pointer;
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+		transition: all 0.2s ease;
+	}
+
+	.speed-slider::-moz-range-thumb:hover {
+		transform: scale(1.2);
+		border-color: #764ba2;
+	}
+
+	.speed-value {
+		display: inline-block;
+		background: #667eea;
+		color: white;
+		padding: 3px 12px;
+		border-radius: 15px;
+		font-size: 0.85rem;
+		font-weight: 600;
+		min-width: 90px;
+		text-align: center;
+	}
+
+	.point-count {
+		display: inline-block;
+		background: #667eea;
+		color: white;
+		padding: 5px 15px;
+		border-radius: 20px;
+		font-weight: 600;
+	}
+</style>
+
+<script>
+	import { VoronoiCanvasController } from '../scripts/canvas-controller';
+
+	// Initialize the controller
+	const controller = new VoronoiCanvasController('canvas');
+
+	// Get DOM elements
+	const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+	const generateBtn = document.getElementById('generateBtn') as HTMLButtonElement;
+	const clearBtn = document.getElementById('clearBtn') as HTMLButtonElement;
+	const randomBtn = document.getElementById('randomBtn') as HTMLButtonElement;
+	const pointCount = document.getElementById('pointCount') as HTMLDivElement;
+	const animationToggle = document.getElementById('animationToggle') as HTMLInputElement;
+	const speedSlider = document.getElementById('speedSlider') as HTMLInputElement;
+	const speedValue = document.getElementById('speedValue') as HTMLSpanElement;
+
+	// Set point count element
+	controller.setPointCountElement(pointCount);
+
+	// Event listeners
+	canvas.addEventListener('click', (e) => controller.handleCanvasClick(e));
+	generateBtn.addEventListener('click', () => controller.generate());
+	clearBtn.addEventListener('click', () => controller.clear());
+	randomBtn.addEventListener('click', () => controller.generateRandomPoints());
+
+	// Animation toggle listener
+	animationToggle.addEventListener('change', (e) => {
+		const target = e.target as HTMLInputElement;
+		controller.setAnimatedMode(target.checked);
+	});
+
+	// Speed slider listener
+	speedSlider.addEventListener('input', (e) => {
+		const target = e.target as HTMLInputElement;
+		const speed = parseInt(target.value);
+		controller.setAnimationSpeed(speed);
+		speedValue.textContent = `${speed} px/frame`;
+	});
+</script>
