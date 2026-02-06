@@ -1,271 +1,271 @@
 # 🎨 Voronoi Diagram Generator
 
-Una aplicación web interactiva para crear y visualizar diagramas de Voronoi con animaciones en tiempo real, construida con **Astro** y **TypeScript**.
+An interactive web application to create and visualize Voronoi diagrams with real-time animations, built with **Astro** and **TypeScript**.
 
 ![Voronoi Diagram](https://img.shields.io/badge/Astro-5.17-BC52EE?style=for-the-badge&logo=astro&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-## ✨ Características
+## ✨ Features
 
-- **🖱️ Interactividad Total**: Coloca puntos con un simple click en el canvas
-- **🎬 Animación Progresiva**: Observa cómo las regiones de Voronoi se expanden desde cada punto
-- **⚡ Control de Velocidad**: Ajusta la velocidad de animación en tiempo real con un slider intuitivo
-- **🎲 Generación Aleatoria**: Crea patrones aleatorios con un solo click
-- **🎨 Colores Vibrantes**: Cada región tiene un color único generado automáticamente
-- **🚀 Alto Rendimiento**: Algoritmos optimizados para renderizado fluido
-- **📱 Responsive**: Diseño adaptable a diferentes tamaños de pantalla
+- **🖱️ Full Interactivity**: Place points with a simple click on the canvas
+- **🎬 Progressive Animation**: Watch how Voronoi regions expand from each point
+- **⚡ Speed Control**: Adjust animation speed in real-time with an intuitive slider
+- **🎲 Random Generation**: Create random patterns with a single click
+- **🎨 Vibrant Colors**: Each region has a unique auto-generated color
+- **🚀 High Performance**: Optimized algorithms for smooth rendering
+- **📱 Responsive**: Adaptable design for different screen sizes
 
 ## 🎯 Demo
 
-### Modo Instantáneo
-Genera el diagrama de Voronoi de forma inmediata, perfecto para visualización rápida.
+### Instant Mode
+Generates the Voronoi diagram immediately, perfect for quick visualization.
 
-### Modo Animado
-Observa la expansión progresiva de las regiones desde cada punto, con control total de velocidad.
+### Animated Mode
+Watch the progressive expansion of regions from each point, with full speed control.
 
-## 🛠️ Tecnologías
+## 🛠️ Technologies
 
-- **[Astro](https://astro.build)** - Framework web moderno con arquitectura de islands
-- **TypeScript** - Tipado estático para código robusto y mantenible
-- **HTML5 Canvas API** - Renderizado de gráficos 2D de alto rendimiento
-- **CSS3** - Estilos modernos con gradientes y animaciones
+- **[Astro](https://astro.build)** - Modern web framework with islands architecture
+- **TypeScript** - Static typing for robust and maintainable code
+- **HTML5 Canvas API** - High-performance 2D graphics rendering
+- **CSS3** - Modern styles with gradients and animations
 
-## 📦 Instalación
+## 📦 Installation
 
-### Prerequisitos
+### Prerequisites
 
 - Node.js 18+
-- npm o pnpm
+- npm or pnpm
 
-### Pasos
+### Steps
 
 ```bash
-# Clonar el repositorio
-git clone https://github.com/tu-usuario/voronoi-diagram-web.git
+# Clone the repository
+git clone https://github.com/your-username/voronoi-diagram-web.git
 
-# Navegar al directorio
+# Navigate to directory
 cd voronoi-diagram-web
 
-# Instalar dependencias
+# Install dependencies
 npm install
 
-# Iniciar servidor de desarrollo
+# Start development server
 npm run dev
 ```
 
-La aplicación estará disponible en `http://localhost:4321/`
+The application will be available at `http://localhost:4321/`
 
-## 🎮 Uso
+## 🎮 Usage
 
-### Controles Principales
+### Main Controls
 
-1. **Colocar Puntos**: Click en cualquier parte del canvas
-2. **Generar Diagrama**: Click en el botón "✨ Generate Voronoi"
-3. **Puntos Aleatorios**: Click en "🎲 Random Points" (genera 15-35 puntos)
-4. **Limpiar Todo**: Click en "🗑️ Clear All"
+1. **Place Points**: Click anywhere on the canvas
+2. **Generate Diagram**: Click the "✨ Generate Voronoi" button
+3. **Random Points**: Click "🎲 Random Points" (generates 15-35 points)
+4. **Clear All**: Click "🗑️ Clear All"
 
-### Configuración de Animación
+### Animation Configuration
 
-- **🎬 Animated Expansion**: Activa/desactiva el modo de animación
-- **⚡ Animation Speed**: Slider para controlar la velocidad (5-50 px/frame)
-  - **Slow**: Animación detallada y suave
-  - **Fast**: Animación rápida
+- **🎬 Animated Expansion**: Enable/disable animation mode
+- **⚡ Animation Speed**: Slider to control speed (5-50 px/frame)
+  - **Slow**: Detailed and smooth animation
+  - **Fast**: Quick animation
 
-## 🏗️ Arquitectura del Proyecto
+## 🏗️ Project Architecture
 
-### Estructura de Archivos
+### File Structure
 
 ```
 src/
 ├── components/
-│   └── VoronoiCanvas.astro          # Componente principal del canvas
+│   └── VoronoiCanvas.astro          # Main canvas component
 ├── scripts/
 │   ├── voronoi/
-│   │   ├── types.ts                 # Definiciones de tipos
-│   │   ├── math.ts                  # Funciones matemáticas
-│   │   ├── renderer.ts              # Renderizado del canvas
-│   │   └── voronoi-generator.ts     # Algoritmo de Voronoi
-│   └── canvas-controller.ts         # Controlador de eventos y estado
+│   │   ├── types.ts                 # Type definitions
+│   │   ├── math.ts                  # Mathematical functions
+│   │   ├── renderer.ts              # Canvas rendering
+│   │   └── voronoi-generator.ts     # Voronoi algorithm
+│   └── canvas-controller.ts         # Event and state controller
 └── pages/
-    └── index.astro                   # Página principal
+    └── index.astro                   # Main page
 ```
 
-### Principios de Diseño
+### Design Principles
 
-#### ✅ Modularidad
-- Separación clara de responsabilidades
-- Cada módulo tiene una función específica
-- Fácil de mantener y extender
+#### ✅ Modularity
+- Clear separation of concerns
+- Each module has a specific function
+- Easy to maintain and extend
 
-#### ✅ Arquitectura de Islands (Astro)
-- Renderizado del lado del servidor por defecto
-- JavaScript solo donde se necesita interactividad
-- Mejor rendimiento y SEO
+#### ✅ Islands Architecture (Astro)
+- Server-side rendering by default
+- JavaScript only where interactivity is needed
+- Better performance and SEO
 
-#### ✅ TypeScript Estricto
-- Tipado completo para mayor seguridad
-- Mejor experiencia de desarrollo con IntelliSense
-- Detección de errores en tiempo de compilación
+#### ✅ Strict TypeScript
+- Complete typing for greater safety
+- Better development experience with IntelliSense
+- Compile-time error detection
 
-## ⚙️ Componentes Principales
+## ⚙️ Main Components
 
 ### 1. **Canvas Controller** (`canvas-controller.ts`)
-Clase principal que gestiona:
-- Estado de los puntos
-- Eventos del canvas y botones
-- Modos de generación (instantáneo/animado)
-- Configuración de velocidad
+Main class that manages:
+- Point state
+- Canvas and button events
+- Generation modes (instant/animated)
+- Speed configuration
 
 ### 2. **Voronoi Generator** (`voronoi-generator.ts`)
-Algoritmos de generación:
-- `generateVoronoi()`: Generación instantánea
-- `generateVoronoiAnimated()`: Generación con animación progresiva
-- `getClosestPoint()`: Cálculo del punto más cercano
+Generation algorithms:
+- `generateVoronoi()`: Instant generation
+- `generateVoronoiAnimated()`: Progressive animation generation
+- `getClosestPoint()`: Closest point calculation
 
 ### 3. **Renderer** (`renderer.ts`)
-Funciones de dibujo:
-- `clearCanvas()`: Limpia el canvas
-- `drawPoints()`: Dibuja los puntos
-- `drawVoronoiBoundaries()`: Dibuja bordes entre regiones
+Drawing functions:
+- `clearCanvas()`: Clears the canvas
+- `drawPoints()`: Draws the points
+- `drawVoronoiBoundaries()`: Draws borders between regions
 
 ### 4. **Math Utilities** (`math.ts`)
-Utilidades matemáticas:
-- `distance()`: Distancia euclidiana
-- `randomColor()`: Generación de colores HSL
-- `hslToRgb()`: Conversión de colores
+Mathematical utilities:
+- `distance()`: Euclidean distance
+- `randomColor()`: HSL color generation
+- `hslToRgb()`: Color conversion
 
-## 🚀 Optimizaciones
+## 🚀 Optimizations
 
-### Rendimiento de Animación
+### Animation Performance
 
-1. **Algoritmo Incremental**
-   - Solo procesa pixels nuevos en cada frame
-   - Usa `Uint8Array` para tracking rápido de pixels coloreados
-   - Reduce complejidad de O(n²) a O(n)
+1. **Incremental Algorithm**
+   - Only processes new pixels in each frame
+   - Uses `Uint8Array` for fast tracking of colored pixels
+   - Reduces complexity from O(n²) to O(n)
 
-2. **Dibujo Progresivo de Bordes**
-   - Dibuja bordes durante la animación (cada 3 frames)
-   - Elimina latencia al finalizar
-   - Experiencia visual más fluida
+2. **Progressive Border Drawing**
+   - Draws borders during animation (every 3 frames)
+   - Eliminates latency at completion
+   - Smoother visual experience
 
-3. **Optimización de Bordes**
-   - Usa pasos de 4 pixels en lugar de 1 (16x más rápido)
-   - Agrupa líneas en un solo path
-   - Una sola llamada a `stroke()`
+3. **Border Optimization**
+   - Uses 4-pixel steps instead of 1 (16x faster)
+   - Groups lines into a single path
+   - Single `stroke()` call
 
-4. **Canvas API Eficiente**
-   - Uso directo de `ImageData` para manipulación de pixels
-   - Minimiza operaciones de dibujo
-   - `requestAnimationFrame` para sincronización con GPU
+4. **Efficient Canvas API**
+   - Direct use of `ImageData` for pixel manipulation
+   - Minimizes drawing operations
+   - `requestAnimationFrame` for GPU synchronization
 
-## 📊 Algoritmo de Voronoi
+## 📊 Voronoi Algorithm
 
-El diagrama de Voronoi divide un plano en regiones basadas en la distancia a un conjunto de puntos. Cada región contiene todos los puntos del plano más cercanos a un punto específico.
+The Voronoi diagram divides a plane into regions based on distance to a set of points. Each region contains all points in the plane closest to a specific point.
 
-### Implementación
+### Implementation
 
-1. **Para cada pixel del canvas**:
-   - Calcula la distancia a todos los puntos
-   - Asigna el pixel a la región del punto más cercano
+1. **For each pixel on the canvas**:
+   - Calculate distance to all points
+   - Assign pixel to the nearest point's region
 
-2. **Dibujo de Bordes**:
-   - Compara puntos más cercanos de pixels adyacentes
-   - Dibuja línea si son diferentes
+2. **Border Drawing**:
+   - Compare nearest points of adjacent pixels
+   - Draw line if they are different
 
-3. **Modo Animado**:
-   - Expande gradualmente el radio desde cada punto
-   - Solo colorea pixels dentro del radio actual
-   - Crea efecto de "conquista de territorio"
+3. **Animated Mode**:
+   - Gradually expands radius from each point
+   - Only colors pixels within current radius
+   - Creates "territory conquest" effect
 
-## 🎨 Personalización
+## 🎨 Customization
 
-### Modificar Colores
+### Modify Colors
 
-Edita la función `randomColor()` en `src/scripts/voronoi/math.ts`:
+Edit the `randomColor()` function in `src/scripts/voronoi/math.ts`:
 
 ```typescript
 export function randomColor(): string {
 	const hue = Math.random() * 360;
-	return `hsl(${hue}, 70%, 60%)`; // Ajusta saturación y brillo
+	return `hsl(${hue}, 70%, 60%)`; // Adjust saturation and brightness
 }
 ```
 
-### Ajustar Tamaño del Canvas
+### Adjust Canvas Size
 
-Modifica el componente `VoronoiCanvas.astro`:
+Modify the `VoronoiCanvas.astro` component:
 
 ```astro
 <canvas id="canvas" width="1000" height="600"></canvas>
 ```
 
-### Cambiar Velocidad de Animación
+### Change Animation Speed
 
-Ajusta los límites del slider en `VoronoiCanvas.astro`:
+Adjust slider limits in `VoronoiCanvas.astro`:
 
 ```astro
 <input
 	type="range"
 	id="speedSlider"
 	min="5"
-	max="50"    <!-- Ajusta máximo -->
+	max="50"    <!-- Adjust maximum -->
 	value="15"
 	step="5"
 />
 ```
 
-## 🧪 Comandos Disponibles
+## 🧪 Available Commands
 
 ```bash
-# Desarrollo
-npm run dev              # Servidor de desarrollo en puerto 4321
+# Development
+npm run dev              # Development server on port 4321
 
-# Producción
-npm run build            # Build para producción
-npm run preview          # Preview del build
+# Production
+npm run build            # Build for production
+npm run preview          # Preview the build
 
-# Utilidades
-npx tsc --noEmit        # Verificar TypeScript sin compilar
+# Utilities
+npx tsc --noEmit        # Verify TypeScript without compiling
 ```
 
-## 🤝 Contribución
+## 🤝 Contributing
 
-Las contribuciones son bienvenidas! Por favor:
+Contributions are welcome! Please:
 
-1. Fork el repositorio
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
+1. Fork the repository
+2. Create a branch for your feature (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📝 Mejoras Futuras
+## 📝 Future Improvements
 
-- [ ] Exportar diagrama como imagen PNG/SVG
-- [ ] Modo de edición: mover/eliminar puntos individuales
-- [ ] Diferentes algoritmos de coloración
-- [ ] Animaciones de transición entre estados
-- [ ] Modo 3D con WebGL
-- [ ] Presets de patrones predefinidos
-- [ ] Undo/Redo de acciones
-- [ ] Compartir diagramas vía URL
+- [ ] Export diagram as PNG/SVG image
+- [ ] Edit mode: move/delete individual points
+- [ ] Different coloring algorithms
+- [ ] Transition animations between states
+- [ ] 3D mode with WebGL
+- [ ] Predefined pattern presets
+- [ ] Undo/Redo actions
+- [ ] Share diagrams via URL
 
-## 📄 Licencia
+## 📄 License
 
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+This project is under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👨‍💻 Autor
+## 👨‍💻 Author
 
-Desarrollado con ❤️ usando Astro y TypeScript
+Developed with ❤️ using Astro and TypeScript
 
 ---
 
-## 🔗 Enlaces Útiles
+## 🔗 Useful Links
 
-- [Documentación de Astro](https://docs.astro.build)
+- [Astro Documentation](https://docs.astro.build)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 - [Canvas API MDN](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
 - [Voronoi Diagram - Wikipedia](https://en.wikipedia.org/wiki/Voronoi_diagram)
 
 ---
 
-**⭐ Si te gusta este proyecto, dale una estrella en GitHub!**
+**⭐ If you like this project, give it a star on GitHub!**
